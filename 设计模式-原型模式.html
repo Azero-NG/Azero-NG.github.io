@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>git_pre_commit - Azero</title>
+<title>设计模式-原型模式 - Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+    <meta name="description" content="原型模式定义 python也有用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 原型类条件 实现Cloneable接口.在java虚拟机中,只有实现了这个接口的类才可以被拷贝,否则CloneNotSupportedException 重写clone方法:Object类,有一个clone方法,但是是protect类型,重写变为public类型.  实现代码123456789101112">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git_pre_commit">
-<meta property="og:url" content="http://blog.azero-ng.cn/git-pre-commit.html">
+<meta property="og:title" content="设计模式-原型模式">
+<meta property="og:url" content="http://blog.azero-ng.cn/设计模式-原型模式.html">
 <meta property="og:site_name" content="Azero">
-<meta property="og:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta property="og:description" content="原型模式定义 python也有用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 原型类条件 实现Cloneable接口.在java虚拟机中,只有实现了这个接口的类才可以被拷贝,否则CloneNotSupportedException 重写clone方法:Object类,有一个clone方法,但是是protect类型,重写变为public类型.  实现代码123456789101112">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-07T00:40:10.066Z">
+<meta property="og:updated_time" content="2019-08-04T09:03:18.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git_pre_commit">
-<meta name="twitter:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta name="twitter:title" content="设计模式-原型模式">
+<meta name="twitter:description" content="原型模式定义 python也有用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。 原型类条件 实现Cloneable接口.在java虚拟机中,只有实现了这个接口的类才可以被拷贝,否则CloneNotSupportedException 重写clone方法:Object类,有一个clone方法,但是是protect类型,重写变为public类型.  实现代码123456789101112">
 <meta name="twitter:image" content="http://blog.azero-ng.cn/images/og_image.png">
 
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                <img src="/images/logo.svg" alt="设计模式-原型模式" height="28">
             
             </a>
         </div>
@@ -158,17 +158,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                <time class="level-item has-text-grey" datetime="2019-05-30T07:54:44.000Z">2019-05-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    3 分钟 读完 (大约 389 个字)
                 </span>
                 
                 
@@ -177,23 +177,35 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                git_pre_commit
+                设计模式-原型模式
             
         </h1>
         <div class="content">
-            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
-<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
-<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
+            <h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><h2 id="定义-python也有"><a href="#定义-python也有" class="headerlink" title="定义 python也有"></a>定义 python也有</h2><p>用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。</p>
+<h2 id="原型类条件"><a href="#原型类条件" class="headerlink" title="原型类条件"></a>原型类条件</h2><ol>
+<li>实现Cloneable接口.在java虚拟机中,只有实现了这个接口的类才可以被拷贝,否则CloneNotSupportedException</li>
+<li>重写clone方法:Object类,有一个clone方法,但是是protect类型,重写变为public类型.</li>
+</ol>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prototype</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Prototype <span class="hljs-title">clone</span><span class="hljs-params">()</span></span>&#123;  </span><br><span class="line">        Prototype prototype = <span class="hljs-keyword">null</span>;  </span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">            prototype = (Prototype)<span class="hljs-keyword">super</span>.clone();  </span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span>(CloneNotSupportedException e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="hljs-keyword">return</span> prototype;   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcretePrototype</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Prototype</span></span>&#123;  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>&#123;  </span><br><span class="line">        System.out.println(<span class="hljs-string">"原型模式实现类"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;  </span><br><span class="line">        ConcretePrototype cp = <span class="hljs-keyword">new</span> ConcretePrototype();  </span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt; <span class="hljs-number">10</span>; i++)&#123;  </span><br><span class="line">            ConcretePrototype clonecp = (ConcretePrototype)cp.clone();  </span><br><span class="line">            clonecp.show();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>性能优于new.clone方法是一个本地方法,直接操作内存的二进制流(如果是特别大的对象,性能的差别非常明显)</li>
+<li>简化对象创建,复制粘贴就好</li>
+</ol>
+<h2 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h2><ol>
+<li>重复地创建相似对象时可以考虑使用原型模式</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>clone不会调用 构造方法</p>
 </li>
-<li><p>添加pre commit hook</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
+<li><p>无视构造方法权限,直接复制(对应private 构造方法导致单例的情况)</p>
 </li>
-<li><p>最终每次commit都可以保证配置文件的更新</p>
+<li><p>深拷贝:拷贝八种基本数据类型(byte,char,short,int,long,float,double，boolean)</p>
+<p>对于数组、容器对象、引用对象等都不会拷贝，这就是浅拷贝</p>
+</li>
+<li><p>这很像python啊</p>
 </li>
 </ol>
+<h2 id="浅拷贝的解决办法"><a href="#浅拷贝的解决办法" class="headerlink" title="浅拷贝的解决办法"></a>浅拷贝的解决办法</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prototype</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-keyword">private</span> ArrayList list = <span class="hljs-keyword">new</span> ArrayList();  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Prototype <span class="hljs-title">clone</span><span class="hljs-params">()</span></span>&#123;  </span><br><span class="line">        Prototype prototype = <span class="hljs-keyword">null</span>;  </span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;  </span><br><span class="line">            prototype = (Prototype)<span class="hljs-keyword">super</span>.clone();  </span><br><span class="line">            prototype.list = (ArrayList) <span class="hljs-keyword">this</span>.list.clone();  </span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span>(CloneNotSupportedException e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="hljs-keyword">return</span> prototype;   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -210,16 +222,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/firewalld下不同网卡端口转发.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/适配器模式.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">firewalld下不同网卡端口转发</span>
+                <span class="level-item">适配器模式</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/archlinux-transparent-proxy.html">
-                <span class="level-item">archlinux_transparent_proxy</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/简单工厂模式.html">
+                <span class="level-item">简单工厂模式</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -351,15 +363,35 @@ var _hmt = _hmt || [];
             <ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>git pre commit 钩子在HEXO的使用</span>
+        <span>原型模式</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1</span>
-        <span>需求分析</span>
+        <span>定义 python也有</span>
         </a></li><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.2</span>
-        <span>解决方案</span>
+        <span>原型类条件</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.3</span>
+        <span>实现代码</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.4</span>
+        <span>优点</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.5</span>
+        <span>适用环境</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.6</span>
+        <span>注意事项</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.7</span>
+        <span>浅拷贝的解决办法</span>
         </a></li></ul></li></ul>
         </div>
     </div>
@@ -871,7 +903,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                    <img src="/images/logo.svg" alt="设计模式-原型模式" height="28">
                 
                 </a>
                 <p class="is-size-7">

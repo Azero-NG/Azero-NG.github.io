@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>git_pre_commit - Azero</title>
+<title>builder设计模式 - Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+    <meta name="description" content="设计模式之建造者模式定义将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 看定义感觉和工厂模式很像啊 组成Builder：抽象 产品的生成步骤123456public interface ComputerBuilder &amp;#123;    void buildCpu();    void buildGpu();    void buildMotherBoard();">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git_pre_commit">
-<meta property="og:url" content="http://blog.azero-ng.cn/git-pre-commit.html">
+<meta property="og:title" content="builder设计模式">
+<meta property="og:url" content="http://blog.azero-ng.cn/builder设计模式.html">
 <meta property="og:site_name" content="Azero">
-<meta property="og:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta property="og:description" content="设计模式之建造者模式定义将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 看定义感觉和工厂模式很像啊 组成Builder：抽象 产品的生成步骤123456public interface ComputerBuilder &amp;#123;    void buildCpu();    void buildGpu();    void buildMotherBoard();">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-07T00:40:10.066Z">
+<meta property="og:updated_time" content="2019-08-04T09:03:18.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git_pre_commit">
-<meta name="twitter:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta name="twitter:title" content="builder设计模式">
+<meta name="twitter:description" content="设计模式之建造者模式定义将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 看定义感觉和工厂模式很像啊 组成Builder：抽象 产品的生成步骤123456public interface ComputerBuilder &amp;#123;    void buildCpu();    void buildGpu();    void buildMotherBoard();">
 <meta name="twitter:image" content="http://blog.azero-ng.cn/images/og_image.png">
 
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                <img src="/images/logo.svg" alt="builder设计模式" height="28">
             
             </a>
         </div>
@@ -158,17 +158,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                <time class="level-item has-text-grey" datetime="2019-05-30T01:33:17.000Z">2019-05-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    2 分钟 读完 (大约 337 个字)
                 </span>
                 
                 
@@ -177,23 +177,18 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                git_pre_commit
+                builder设计模式
             
         </h1>
         <div class="content">
-            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
-<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
-<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
-</li>
-<li><p>添加pre commit hook</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
-</li>
-<li><p>最终每次commit都可以保证配置文件的更新</p>
-</li>
-</ol>
+            <h1 id="设计模式之建造者模式"><a href="#设计模式之建造者模式" class="headerlink" title="设计模式之建造者模式"></a>设计模式之建造者模式</h1><h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>看定义感觉和工厂模式很像啊</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><h2 id="Builder：抽象-产品的生成步骤"><a href="#Builder：抽象-产品的生成步骤" class="headerlink" title="Builder：抽象 产品的生成步骤"></a>Builder：抽象 产品的生成步骤</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ComputerBuilder</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildCpu</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildGpu</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildMotherBoard</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function">Computer <span class="hljs-title">buildComputer</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ConcreteBuilder：实现builder-不同产品-采用不同的ConcreteBuilder"><a href="#ConcreteBuilder：实现builder-不同产品-采用不同的ConcreteBuilder" class="headerlink" title="ConcreteBuilder：实现builder,不同产品 采用不同的ConcreteBuilder"></a>ConcreteBuilder：实现builder,不同产品 采用不同的ConcreteBuilder</h2><p>由于不同产品拥有不同的生产过程,所以不同产品不同ConcreteBuilder</p>
+<p>如果两个产品之间只有部分修改,可以考虑通过继承,override修改部分功能</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AmdBuilder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ComputerBuilder</span> </span>&#123;</span><br><span class="line">       Computer com;</span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AmdBuilder</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com = <span class="hljs-keyword">new</span> Computer();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildCpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setCpu(<span class="hljs-string">"AMD"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildGpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setGpu(<span class="hljs-string">"AMD Radeon"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMotherBoard</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setMother_board(<span class="hljs-string">"asus"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> Computer <span class="hljs-title">buildComputer</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           <span class="hljs-keyword">return</span> com;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntelBuilder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ComputerBuilder</span> </span>&#123;</span><br><span class="line">       Computer com;</span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">IntelBuilder</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com = <span class="hljs-keyword">new</span> Computer();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildCpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setCpu(<span class="hljs-string">"Intel"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildGpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setGpu(<span class="hljs-string">"Navi"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMotherBoard</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setMother_board(<span class="hljs-string">"华擎"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> Computer <span class="hljs-title">buildComputer</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           <span class="hljs-keyword">return</span> com;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Director：把-所有的生产步骤联系起来-最终生产出产品"><a href="#Director：把-所有的生产步骤联系起来-最终生产出产品" class="headerlink" title="Director：把 所有的生产步骤联系起来,最终生产出产品"></a>Director：把 所有的生产步骤联系起来,最终生产出产品</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComDirector</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Computer <span class="hljs-title">constructCom</span><span class="hljs-params">(ComputerBuilder CB)</span></span>&#123;</span><br><span class="line">        CB.buildCpu();</span><br><span class="line">        CB.buildGpu();</span><br><span class="line">        CB.buildMotherBoard();</span><br><span class="line">        <span class="hljs-keyword">return</span> CB.buildComputer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Product：要生产的产品框架"><a href="#Product：要生产的产品框架" class="headerlink" title="Product：要生产的产品框架"></a>Product：要生产的产品框架</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computer</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> String cpu;</span><br><span class="line">    <span class="hljs-keyword">private</span> String gpu;</span><br><span class="line">    <span class="hljs-keyword">private</span> String mother_board;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getCpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> cpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCpu</span><span class="hljs-params">(String cpu)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cpu = cpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getGpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> gpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setGpu</span><span class="hljs-params">(String gpu)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.gpu = gpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getMother_board</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mother_board;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMother_board</span><span class="hljs-params">(String MB)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mother_board = MB;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -210,16 +205,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/firewalld下不同网卡端口转发.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/简单工厂模式.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">firewalld下不同网卡端口转发</span>
+                <span class="level-item">简单工厂模式</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/archlinux-transparent-proxy.html">
-                <span class="level-item">archlinux_transparent_proxy</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/java-enum.html">
+                <span class="level-item">java_enum</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -351,15 +346,31 @@ var _hmt = _hmt || [];
             <ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>git pre commit 钩子在HEXO的使用</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.1</span>
-        <span>需求分析</span>
+        <span>设计模式之建造者模式</span>
         </a></li><li>
         <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.2</span>
-        <span>解决方案</span>
+        <span class="has-mr-6">2</span>
+        <span>定义</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2.1</span>
+        <span>组成</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2.2</span>
+        <span>Builder：抽象 产品的生成步骤</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2.3</span>
+        <span>ConcreteBuilder：实现builder,不同产品 采用不同的ConcreteBuilder</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2.4</span>
+        <span>Director：把 所有的生产步骤联系起来,最终生产出产品</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2.5</span>
+        <span>Product：要生产的产品框架</span>
         </a></li></ul></li></ul>
         </div>
     </div>
@@ -871,7 +882,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                    <img src="/images/logo.svg" alt="builder设计模式" height="28">
                 
                 </a>
                 <p class="is-size-7">

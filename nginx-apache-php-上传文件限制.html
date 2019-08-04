@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>git_pre_commit - Azero</title>
+<title>nginx_apache_php_上传文件限制 - Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+    <meta name="description" content="nginx 上传文件限制client_max_body_size 150M  必须要放在server下的server_name下 nginx -s reload apache 上传文件限制.htaccess LimitRequestBody     1024000000 php 上传文件限制12345upload_max_filesize: 上传的文件的最大大小post_max_size: POS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git_pre_commit">
-<meta property="og:url" content="http://blog.azero-ng.cn/git-pre-commit.html">
+<meta property="og:title" content="nginx_apache_php_上传文件限制">
+<meta property="og:url" content="http://blog.azero-ng.cn/nginx-apache-php-上传文件限制.html">
 <meta property="og:site_name" content="Azero">
-<meta property="og:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta property="og:description" content="nginx 上传文件限制client_max_body_size 150M  必须要放在server下的server_name下 nginx -s reload apache 上传文件限制.htaccess LimitRequestBody     1024000000 php 上传文件限制12345upload_max_filesize: 上传的文件的最大大小post_max_size: POS">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-07T00:40:10.066Z">
+<meta property="og:updated_time" content="2019-08-04T09:03:18.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git_pre_commit">
-<meta name="twitter:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta name="twitter:title" content="nginx_apache_php_上传文件限制">
+<meta name="twitter:description" content="nginx 上传文件限制client_max_body_size 150M  必须要放在server下的server_name下 nginx -s reload apache 上传文件限制.htaccess LimitRequestBody     1024000000 php 上传文件限制12345upload_max_filesize: 上传的文件的最大大小post_max_size: POS">
 <meta name="twitter:image" content="http://blog.azero-ng.cn/images/og_image.png">
 
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                <img src="/images/logo.svg" alt="nginx_apache_php_上传文件限制" height="28">
             
             </a>
         </div>
@@ -158,17 +158,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                <time class="level-item has-text-grey" datetime="2019-06-20T08:10:48.000Z">2019-06-20</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                <a class="has-link-grey -link" href="/categories/运维/">运维</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    1 分钟 读完 (大约 171 个字)
                 </span>
                 
                 
@@ -177,23 +177,20 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                git_pre_commit
+                nginx_apache_php_上传文件限制
             
         </h1>
         <div class="content">
-            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
-<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
-<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
-</li>
-<li><p>添加pre commit hook</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
-</li>
-<li><p>最终每次commit都可以保证配置文件的更新</p>
-</li>
-</ol>
+            <h1 id="nginx-上传文件限制"><a href="#nginx-上传文件限制" class="headerlink" title="nginx 上传文件限制"></a>nginx 上传文件限制</h1><p>client_max_body_size 150M </p>
+<p>必须要放在server下的server_name下</p>
+<p>nginx -s reload</p>
+<h1 id="apache-上传文件限制"><a href="#apache-上传文件限制" class="headerlink" title="apache 上传文件限制"></a>apache 上传文件限制</h1><p>.htaccess</p>
+<p>LimitRequestBody     1024000000</p>
+<h1 id="php-上传文件限制"><a href="#php-上传文件限制" class="headerlink" title="php 上传文件限制"></a>php 上传文件限制</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upload_max_filesize: 上传的文件的最大大小</span><br><span class="line">post_max_size: POST数据所允许的最大大小</span><br><span class="line">max_execution_time: 脚本最大执行时间</span><br><span class="line">max_input_time: 脚本解析请求数据消耗的最大时间</span><br><span class="line">memory_limit:一个脚本所能够申请到的最大内存字节数</span><br></pre></td></tr></table></figure>
+<h1 id="mysql-最大sql语句限制"><a href="#mysql-最大sql语句限制" class="headerlink" title="mysql 最大sql语句限制"></a>mysql 最大sql语句限制</h1><p>Err [Imp] 1153 - Got a packet bigger than ‘max_allowed_packet’ </p>
+<p>在MySQL安装目录下找到文件my.cnf，搜索[mysqld]，在其下面添加一句话</p>
+<p>max_allowed_packet=150M</p>
+<p>systemctl restart mariadb</p>
 
         </div>
         
@@ -210,16 +207,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/firewalld下不同网卡端口转发.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/记一次archlinux莫名鼠标键盘失灵.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">firewalld下不同网卡端口转发</span>
+                <span class="level-item">记一次archlinux莫名鼠标键盘失灵</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/archlinux-transparent-proxy.html">
-                <span class="level-item">archlinux_transparent_proxy</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/阿里云v2ray.html">
+                <span class="level-item">阿里云v2ray</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -351,16 +348,20 @@ var _hmt = _hmt || [];
             <ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>git pre commit 钩子在HEXO的使用</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.1</span>
-        <span>需求分析</span>
+        <span>nginx 上传文件限制</span>
         </a></li><li>
         <a class="is-flex" href="#undefined">
-        <span class="has-mr-6">1.2</span>
-        <span>解决方案</span>
-        </a></li></ul></li></ul>
+        <span class="has-mr-6">2</span>
+        <span>apache 上传文件限制</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3</span>
+        <span>php 上传文件限制</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">4</span>
+        <span>mysql 最大sql语句限制</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
@@ -871,7 +872,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                    <img src="/images/logo.svg" alt="nginx_apache_php_上传文件限制" height="28">
                 
                 </a>
                 <p class="is-size-7">

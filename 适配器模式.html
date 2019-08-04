@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>git_pre_commit - Azero</title>
+<title>适配器模式 - Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+    <meta name="description" content="适配器模式适用场景 组成部分 目标接口（Target）：客户所期待的接口。目标可以是具体的或抽象的类，也可以是接口。  需要适配的类（Adaptee）：需要适配的类或适配者类。  适配器（Adapter）：通过包装一个需要适配的对象，把原接口转换成目标接口。　　   实现方式１　类的适配器模式（采用继承实现）123456789101112131415161718192021222324252627">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git_pre_commit">
-<meta property="og:url" content="http://blog.azero-ng.cn/git-pre-commit.html">
+<meta property="og:title" content="适配器模式">
+<meta property="og:url" content="http://blog.azero-ng.cn/适配器模式.html">
 <meta property="og:site_name" content="Azero">
-<meta property="og:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta property="og:description" content="适配器模式适用场景 组成部分 目标接口（Target）：客户所期待的接口。目标可以是具体的或抽象的类，也可以是接口。  需要适配的类（Adaptee）：需要适配的类或适配者类。  适配器（Adapter）：通过包装一个需要适配的对象，把原接口转换成目标接口。　　   实现方式１　类的适配器模式（采用继承实现）123456789101112131415161718192021222324252627">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-07T00:40:10.066Z">
+<meta property="og:updated_time" content="2019-08-04T09:03:18.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git_pre_commit">
-<meta name="twitter:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta name="twitter:title" content="适配器模式">
+<meta name="twitter:description" content="适配器模式适用场景 组成部分 目标接口（Target）：客户所期待的接口。目标可以是具体的或抽象的类，也可以是接口。  需要适配的类（Adaptee）：需要适配的类或适配者类。  适配器（Adapter）：通过包装一个需要适配的对象，把原接口转换成目标接口。　　   实现方式１　类的适配器模式（采用继承实现）123456789101112131415161718192021222324252627">
 <meta name="twitter:image" content="http://blog.azero-ng.cn/images/og_image.png">
 
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                <img src="/images/logo.svg" alt="适配器模式" height="28">
             
             </a>
         </div>
@@ -158,17 +158,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                <time class="level-item has-text-grey" datetime="2019-05-30T09:05:29.000Z">2019-05-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    5 分钟 读完 (大约 773 个字)
                 </span>
                 
                 
@@ -177,22 +177,34 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                git_pre_commit
+                适配器模式
             
         </h1>
         <div class="content">
-            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
-<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
-<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
+            <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p><img src="https://img-blog.csdn.net/20140330074944187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvamFzb24wNTM5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></p>
+<h2 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h2><ol>
+<li><p>目标接口（Target）：客户所期待的接口。目标可以是具体的或抽象的类，也可以是接口。</p>
 </li>
-<li><p>添加pre commit hook</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
+<li><p>需要适配的类（Adaptee）：需要适配的类或适配者类。</p>
 </li>
-<li><p>最终每次commit都可以保证配置文件的更新</p>
+<li><p>适配器（Adapter）：通过包装一个需要适配的对象，把原接口转换成目标接口。　　</p>
 </li>
+</ol>
+<h2 id="实现方式１-类的适配器模式（采用继承实现）"><a href="#实现方式１-类的适配器模式（采用继承实现）" class="headerlink" title="实现方式１　类的适配器模式（采用继承实现）"></a>实现方式１　类的适配器模式（采用继承实现）</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 已存在的、具有特殊功能、但不符合我们既有的标准接口的类</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">specificRequest</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="hljs-string">"被适配类具有 特殊功能..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 目标接口，或称为标准接口</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Target</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 具体目标类，只提供普通功能</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteTarget</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Target</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="hljs-string">"普通类 具有 普通功能..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 适配器类，继承了被适配类，同时实现标准接口</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Adaptee</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Target</span></span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">super</span>.specificRequest();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 测试类public class Client &#123;</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// 使用普通功能类</span></span><br><span class="line">		Target concreteTarget = <span class="hljs-keyword">new</span> ConcreteTarget();</span><br><span class="line">		concreteTarget.request();</span><br><span class="line">		</span><br><span class="line">		<span class="hljs-comment">// 使用特殊功能类，即适配类</span></span><br><span class="line">		Target adapter = <span class="hljs-keyword">new</span> Adapter();</span><br><span class="line">		adapter.request();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点看Adapter类,继承adaptee,实现target接口,接口内部 调用真正起作用的函数.最后客户使用Adapter的接口</p>
+<h2 id="对象适配器-直接关联"><a href="#对象适配器-直接关联" class="headerlink" title="对象适配器 直接关联"></a>对象适配器 直接关联</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 适配器类，直接关联被适配类，同时实现标准接口</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Target</span></span>&#123;</span><br><span class="line">	<span class="hljs-comment">// 直接关联被适配类</span></span><br><span class="line">	<span class="hljs-keyword">private</span> Adaptee adaptee;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-comment">// 可以通过构造函数传入具体需要适配的被适配类对象</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Adapter</span> <span class="hljs-params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.adaptee = adaptee;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// 这里是使用委托的方式完成特殊功能</span></span><br><span class="line">		<span class="hljs-keyword">this</span>.adaptee.specificRequest();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 测试类</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// 使用普通功能类</span></span><br><span class="line">		Target concreteTarget = <span class="hljs-keyword">new</span> ConcreteTarget();</span><br><span class="line">		concreteTarget.request();</span><br><span class="line">		</span><br><span class="line">		<span class="hljs-comment">// 使用特殊功能类，即适配类，</span></span><br><span class="line">		<span class="hljs-comment">// 需要先创建一个被适配类的对象作为参数</span></span><br><span class="line">		Target adapter = <span class="hljs-keyword">new</span> Adapter(<span class="hljs-keyword">new</span> Adaptee());</span><br><span class="line">		adapter.request();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Adapter 存储Adaptee 地址,客户调用Adapter接口,Adapter 再调用Adaptee接口.</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>不需要客户端做改变,可以直接调用接口</li>
+<li>复用现存类,解决环境和现存类接口不一问题</li>
+<li>解耦target和adaptee</li>
+<li>同一个适配器可以把适配者类和它的子类都适配到目标接口。</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>对于对象适配器来说，更换适配器的实现过程比较复杂。(为什么呢?挺简单的吧)</p>
+<h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><ol>
+<li>现存类的接口不符合系统的接口</li>
+<li>旧的系统开发的类已经实现了一些功能，但是客户端却只能以另外接口的形式访问，但我们不希望手动更改原有类的时候。</li>
+<li>使用第三方组件，组件接口定义和自己定义的不同，不希望修改自己的接口，但是要使用第三方组件接口的功能。</li>
 </ol>
 
         </div>
@@ -210,16 +222,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/firewalld下不同网卡端口转发.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/装饰器模式.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">firewalld下不同网卡端口转发</span>
+                <span class="level-item">装饰器模式</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/archlinux-transparent-proxy.html">
-                <span class="level-item">archlinux_transparent_proxy</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/设计模式-原型模式.html">
+                <span class="level-item">设计模式-原型模式</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -351,15 +363,35 @@ var _hmt = _hmt || [];
             <ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>git pre commit 钩子在HEXO的使用</span>
+        <span>适配器模式</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1</span>
-        <span>需求分析</span>
+        <span>适用场景</span>
         </a></li><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.2</span>
-        <span>解决方案</span>
+        <span>组成部分</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.3</span>
+        <span>实现方式１　类的适配器模式（采用继承实现）</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.4</span>
+        <span>对象适配器 直接关联</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.5</span>
+        <span>优点</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.6</span>
+        <span>缺点</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.7</span>
+        <span>适用场景</span>
         </a></li></ul></li></ul>
         </div>
     </div>
@@ -871,7 +903,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                    <img src="/images/logo.svg" alt="适配器模式" height="28">
                 
                 </a>
                 <p class="is-size-7">

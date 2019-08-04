@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>git_pre_commit - Azero</title>
+<title>门面模式 - Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+    <meta name="description" content="门面模式介绍 组成:client,Facade,modules 解决问题:子模块过多,客户调用复杂 解决方案:引入facade,客户只知道facade,简化系统复杂性,modules只知道facade,并把它当做客户.  优点 降低耦合度 降低了client和modules的耦合度,使modules更容易扩展和维护.  简单易用 使子系统更易用,client不再需要和子系统交互.  更好的划分访问">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git_pre_commit">
-<meta property="og:url" content="http://blog.azero-ng.cn/git-pre-commit.html">
+<meta property="og:title" content="门面模式">
+<meta property="og:url" content="http://blog.azero-ng.cn/门面模式.html">
 <meta property="og:site_name" content="Azero">
-<meta property="og:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta property="og:description" content="门面模式介绍 组成:client,Facade,modules 解决问题:子模块过多,客户调用复杂 解决方案:引入facade,客户只知道facade,简化系统复杂性,modules只知道facade,并把它当做客户.  优点 降低耦合度 降低了client和modules的耦合度,使modules更容易扩展和维护.  简单易用 使子系统更易用,client不再需要和子系统交互.  更好的划分访问">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-07T00:40:10.066Z">
+<meta property="og:updated_time" content="2019-08-04T09:03:18.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git_pre_commit">
-<meta name="twitter:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta name="twitter:title" content="门面模式">
+<meta name="twitter:description" content="门面模式介绍 组成:client,Facade,modules 解决问题:子模块过多,客户调用复杂 解决方案:引入facade,客户只知道facade,简化系统复杂性,modules只知道facade,并把它当做客户.  优点 降低耦合度 降低了client和modules的耦合度,使modules更容易扩展和维护.  简单易用 使子系统更易用,client不再需要和子系统交互.  更好的划分访问">
 <meta name="twitter:image" content="http://blog.azero-ng.cn/images/og_image.png">
 
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                <img src="/images/logo.svg" alt="门面模式" height="28">
             
             </a>
         </div>
@@ -158,17 +158,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                <time class="level-item has-text-grey" datetime="2019-06-04T08:11:08.000Z">2019-06-04</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    2 分钟 读完 (大约 318 个字)
                 </span>
                 
                 
@@ -177,23 +177,29 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                git_pre_commit
+                门面模式
             
         </h1>
         <div class="content">
-            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
-<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
-<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
+            <h1 id="门面模式"><a href="#门面模式" class="headerlink" title="门面模式"></a>门面模式</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ol>
+<li>组成:client,Facade,modules</li>
+<li>解决问题:子模块过多,客户调用复杂</li>
+<li>解决方案:引入facade,客户只知道facade,简化系统复杂性,modules只知道facade,并把它当做客户.</li>
+</ol>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li><p>降低耦合度</p>
+<p>降低了client和modules的耦合度,使modules更容易扩展和维护.</p>
 </li>
-<li><p>添加pre commit hook</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
+<li><p>简单易用</p>
+<p>使子系统更易用,client不再需要和子系统交互.</p>
 </li>
-<li><p>最终每次commit都可以保证配置文件的更新</p>
+<li><p>更好的划分访问层次</p>
 </li>
 </ol>
+<p>　　通过合理使用Facade，可以帮助我们更好地划分访问的层次。有些方法是对系统外的，有些方法是系统内部使用的。把需要暴露给外部的功能集中到门面中，这样既方便客户端使用，也很好地隐藏了内部的细节。</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><h3 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleA</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//示意方法</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testA</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"调用ModuleA中的testA方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleB</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">//示意方法</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testB</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"调用ModuleB中的testB方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ModuleC</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testC</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"调用ModuleC中的testC方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Facade"><a href="#Facade" class="headerlink" title="Facade"></a>Facade</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Facade_in</span> </span>&#123;</span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           ModuleA a = <span class="hljs-keyword">new</span> ModuleA();</span><br><span class="line">           a.testA();</span><br><span class="line">           ModuleB b = <span class="hljs-keyword">new</span> ModuleB();</span><br><span class="line">           b.testB();</span><br><span class="line">           ModuleC c = <span class="hljs-keyword">new</span> ModuleC();</span><br><span class="line">           c.testC();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">new</span> Facade_in().test();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">new</span> Facade().run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -210,16 +216,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/firewalld下不同网卡端口转发.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/观察者模式.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">firewalld下不同网卡端口转发</span>
+                <span class="level-item">观察者模式</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/archlinux-transparent-proxy.html">
-                <span class="level-item">archlinux_transparent_proxy</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/代理模式.html">
+                <span class="level-item">代理模式</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -351,16 +357,32 @@ var _hmt = _hmt || [];
             <ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>git pre commit 钩子在HEXO的使用</span>
+        <span>门面模式</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1</span>
-        <span>需求分析</span>
+        <span>介绍</span>
         </a></li><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.2</span>
-        <span>解决方案</span>
-        </a></li></ul></li></ul>
+        <span>优点</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.3</span>
+        <span>组成</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.3.1</span>
+        <span>Modules</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.3.2</span>
+        <span>Facade</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">1.3.3</span>
+        <span>调用</span>
+        </a></li></ul></li></ul></li></ul>
         </div>
     </div>
 </div>
@@ -871,7 +893,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                    <img src="/images/logo.svg" alt="门面模式" height="28">
                 
                 </a>
                 <p class="is-size-7">

@@ -2,14 +2,14 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分类: linux - Azero</title>
+<title>Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta property="og:type" content="website">
 <meta property="og:title" content="Azero">
-<meta property="og:url" content="http://blog.azero-ng.cn/categories/linux/index.html">
+<meta property="og:url" content="http://blog.azero-ng.cn/page/2/index.html">
 <meta property="og:site_name" content="Azero">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
@@ -144,35 +144,24 @@ var _hmt = _hmt || [];
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/categories">分类</a></li>
-            
-            <li class="is-active"><a href="#" aria-current="page">linux</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-28T01:36:00.000Z">2019-06-28</time>
+                <time class="level-item has-text-grey" datetime="2019-05-30T09:05:29.000Z">2019-05-30</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/linux/">linux</a>
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 56 个字)
+                    5 分钟 读完 (大约 773 个字)
                 </span>
                 
                 
@@ -181,19 +170,444 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/记一次archlinux莫名鼠标键盘失灵.html">记一次archlinux莫名鼠标键盘失灵</a>
+                <a class="has-link-black-ter" href="/适配器模式.html">适配器模式</a>
             
         </h1>
         <div class="content">
-            <h1 id="有一天开机突然发现键盘鼠标失灵了"><a href="#有一天开机突然发现键盘鼠标失灵了" class="headerlink" title="有一天开机突然发现键盘鼠标失灵了"></a>有一天开机突然发现键盘鼠标失灵了</h1><ol>
-<li>修改内核参数,加入single进入单例模式</li>
-<li>journalctl -xb</li>
-<li>搜索 fail</li>
-<li>发现virtual box项</li>
-<li>关闭virtual box加载的几个模块</li>
-<li>重启</li>
+            <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p><img src="https://img-blog.csdn.net/20140330074944187?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvamFzb24wNTM5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></p>
+<h2 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h2><ol>
+<li><p>目标接口（Target）：客户所期待的接口。目标可以是具体的或抽象的类，也可以是接口。</p>
+</li>
+<li><p>需要适配的类（Adaptee）：需要适配的类或适配者类。</p>
+</li>
+<li><p>适配器（Adapter）：通过包装一个需要适配的对象，把原接口转换成目标接口。　　</p>
+</li>
 </ol>
-<p>搞定</p>
+<h2 id="实现方式１-类的适配器模式（采用继承实现）"><a href="#实现方式１-类的适配器模式（采用继承实现）" class="headerlink" title="实现方式１　类的适配器模式（采用继承实现）"></a>实现方式１　类的适配器模式（采用继承实现）</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 已存在的、具有特殊功能、但不符合我们既有的标准接口的类</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adaptee</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">specificRequest</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="hljs-string">"被适配类具有 特殊功能..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 目标接口，或称为标准接口</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Target</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 具体目标类，只提供普通功能</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteTarget</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Target</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="hljs-string">"普通类 具有 普通功能..."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 适配器类，继承了被适配类，同时实现标准接口</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Adaptee</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Target</span></span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">super</span>.specificRequest();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 测试类public class Client &#123;</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// 使用普通功能类</span></span><br><span class="line">		Target concreteTarget = <span class="hljs-keyword">new</span> ConcreteTarget();</span><br><span class="line">		concreteTarget.request();</span><br><span class="line">		</span><br><span class="line">		<span class="hljs-comment">// 使用特殊功能类，即适配类</span></span><br><span class="line">		Target adapter = <span class="hljs-keyword">new</span> Adapter();</span><br><span class="line">		adapter.request();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点看Adapter类,继承adaptee,实现target接口,接口内部 调用真正起作用的函数.最后客户使用Adapter的接口</p>
+<h2 id="对象适配器-直接关联"><a href="#对象适配器-直接关联" class="headerlink" title="对象适配器 直接关联"></a>对象适配器 直接关联</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 适配器类，直接关联被适配类，同时实现标准接口</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Target</span></span>&#123;</span><br><span class="line">	<span class="hljs-comment">// 直接关联被适配类</span></span><br><span class="line">	<span class="hljs-keyword">private</span> Adaptee adaptee;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-comment">// 可以通过构造函数传入具体需要适配的被适配类对象</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Adapter</span> <span class="hljs-params">(Adaptee adaptee)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-keyword">this</span>.adaptee = adaptee;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">request</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// 这里是使用委托的方式完成特殊功能</span></span><br><span class="line">		<span class="hljs-keyword">this</span>.adaptee.specificRequest();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="hljs-comment">// 测试类</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="hljs-comment">// 使用普通功能类</span></span><br><span class="line">		Target concreteTarget = <span class="hljs-keyword">new</span> ConcreteTarget();</span><br><span class="line">		concreteTarget.request();</span><br><span class="line">		</span><br><span class="line">		<span class="hljs-comment">// 使用特殊功能类，即适配类，</span></span><br><span class="line">		<span class="hljs-comment">// 需要先创建一个被适配类的对象作为参数</span></span><br><span class="line">		Target adapter = <span class="hljs-keyword">new</span> Adapter(<span class="hljs-keyword">new</span> Adaptee());</span><br><span class="line">		adapter.request();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Adapter 存储Adaptee 地址,客户调用Adapter接口,Adapter 再调用Adaptee接口.</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>不需要客户端做改变,可以直接调用接口</li>
+<li>复用现存类,解决环境和现存类接口不一问题</li>
+<li>解耦target和adaptee</li>
+<li>同一个适配器可以把适配者类和它的子类都适配到目标接口。</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>对于对象适配器来说，更换适配器的实现过程比较复杂。(为什么呢?挺简单的吧)</p>
+<h2 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h2><ol>
+<li>现存类的接口不符合系统的接口</li>
+<li>旧的系统开发的类已经实现了一些功能，但是客户端却只能以另外接口的形式访问，但我们不希望手动更改原有类的时候。</li>
+<li>使用第三方组件，组件接口定义和自己定义的不同，不希望修改自己的接口，但是要使用第三方组件接口的功能。</li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-30T07:54:44.000Z">2019-05-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 389 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/设计模式-原型模式.html">设计模式-原型模式</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><h2 id="定义-python也有"><a href="#定义-python也有" class="headerlink" title="定义 python也有"></a>定义 python也有</h2><p>用原型实例指定创建对象的种类，并通过拷贝这些原型创建新的对象。</p>
+<h2 id="原型类条件"><a href="#原型类条件" class="headerlink" title="原型类条件"></a>原型类条件</h2><ol>
+<li>实现Cloneable接口.在java虚拟机中,只有实现了这个接口的类才可以被拷贝,否则CloneNotSupportedException</li>
+<li>重写clone方法:Object类,有一个clone方法,但是是protect类型,重写变为public类型.</li>
+</ol>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prototype</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Prototype <span class="hljs-title">clone</span><span class="hljs-params">()</span></span>&#123;  </span><br><span class="line">        Prototype prototype = <span class="hljs-keyword">null</span>;  </span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;</span><br><span class="line">            prototype = (Prototype)<span class="hljs-keyword">super</span>.clone();  </span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span>(CloneNotSupportedException e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="hljs-keyword">return</span> prototype;   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcretePrototype</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Prototype</span></span>&#123;  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>&#123;  </span><br><span class="line">        System.out.println(<span class="hljs-string">"原型模式实现类"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Client</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;  </span><br><span class="line">        ConcretePrototype cp = <span class="hljs-keyword">new</span> ConcretePrototype();  </span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt; <span class="hljs-number">10</span>; i++)&#123;  </span><br><span class="line">            ConcretePrototype clonecp = (ConcretePrototype)cp.clone();  </span><br><span class="line">            clonecp.show();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
+<li>性能优于new.clone方法是一个本地方法,直接操作内存的二进制流(如果是特别大的对象,性能的差别非常明显)</li>
+<li>简化对象创建,复制粘贴就好</li>
+</ol>
+<h2 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h2><ol>
+<li>重复地创建相似对象时可以考虑使用原型模式</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>clone不会调用 构造方法</p>
+</li>
+<li><p>无视构造方法权限,直接复制(对应private 构造方法导致单例的情况)</p>
+</li>
+<li><p>深拷贝:拷贝八种基本数据类型(byte,char,short,int,long,float,double，boolean)</p>
+<p>对于数组、容器对象、引用对象等都不会拷贝，这就是浅拷贝</p>
+</li>
+<li><p>这很像python啊</p>
+</li>
+</ol>
+<h2 id="浅拷贝的解决办法"><a href="#浅拷贝的解决办法" class="headerlink" title="浅拷贝的解决办法"></a>浅拷贝的解决办法</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prototype</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> </span>&#123;  </span><br><span class="line">    <span class="hljs-keyword">private</span> ArrayList list = <span class="hljs-keyword">new</span> ArrayList();  </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Prototype <span class="hljs-title">clone</span><span class="hljs-params">()</span></span>&#123;  </span><br><span class="line">        Prototype prototype = <span class="hljs-keyword">null</span>;  </span><br><span class="line">        <span class="hljs-keyword">try</span>&#123;  </span><br><span class="line">            prototype = (Prototype)<span class="hljs-keyword">super</span>.clone();  </span><br><span class="line">            prototype.list = (ArrayList) <span class="hljs-keyword">this</span>.list.clone();  </span><br><span class="line">        &#125;<span class="hljs-keyword">catch</span>(CloneNotSupportedException e)&#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="hljs-keyword">return</span> prototype;   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-30T02:47:12.000Z">2019-05-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 6 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/简单工厂模式.html">简单工厂模式</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h1>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-30T01:33:17.000Z">2019-05-30</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 337 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/builder设计模式.html">builder设计模式</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="设计模式之建造者模式"><a href="#设计模式之建造者模式" class="headerlink" title="设计模式之建造者模式"></a>设计模式之建造者模式</h1><h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>将一个复杂的对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>看定义感觉和工厂模式很像啊</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><h2 id="Builder：抽象-产品的生成步骤"><a href="#Builder：抽象-产品的生成步骤" class="headerlink" title="Builder：抽象 产品的生成步骤"></a>Builder：抽象 产品的生成步骤</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">ComputerBuilder</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildCpu</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildGpu</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildMotherBoard</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function">Computer <span class="hljs-title">buildComputer</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ConcreteBuilder：实现builder-不同产品-采用不同的ConcreteBuilder"><a href="#ConcreteBuilder：实现builder-不同产品-采用不同的ConcreteBuilder" class="headerlink" title="ConcreteBuilder：实现builder,不同产品 采用不同的ConcreteBuilder"></a>ConcreteBuilder：实现builder,不同产品 采用不同的ConcreteBuilder</h2><p>由于不同产品拥有不同的生产过程,所以不同产品不同ConcreteBuilder</p>
+<p>如果两个产品之间只有部分修改,可以考虑通过继承,override修改部分功能</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AmdBuilder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ComputerBuilder</span> </span>&#123;</span><br><span class="line">       Computer com;</span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AmdBuilder</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com = <span class="hljs-keyword">new</span> Computer();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildCpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setCpu(<span class="hljs-string">"AMD"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildGpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setGpu(<span class="hljs-string">"AMD Radeon"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMotherBoard</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setMother_board(<span class="hljs-string">"asus"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> Computer <span class="hljs-title">buildComputer</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           <span class="hljs-keyword">return</span> com;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntelBuilder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ComputerBuilder</span> </span>&#123;</span><br><span class="line">       Computer com;</span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">IntelBuilder</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com = <span class="hljs-keyword">new</span> Computer();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildCpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setCpu(<span class="hljs-string">"Intel"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildGpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setGpu(<span class="hljs-string">"Navi"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMotherBoard</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           com.setMother_board(<span class="hljs-string">"华擎"</span>);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="hljs-function"><span class="hljs-keyword">public</span> Computer <span class="hljs-title">buildComputer</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">           <span class="hljs-keyword">return</span> com;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Director：把-所有的生产步骤联系起来-最终生产出产品"><a href="#Director：把-所有的生产步骤联系起来-最终生产出产品" class="headerlink" title="Director：把 所有的生产步骤联系起来,最终生产出产品"></a>Director：把 所有的生产步骤联系起来,最终生产出产品</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ComDirector</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Computer <span class="hljs-title">constructCom</span><span class="hljs-params">(ComputerBuilder CB)</span></span>&#123;</span><br><span class="line">        CB.buildCpu();</span><br><span class="line">        CB.buildGpu();</span><br><span class="line">        CB.buildMotherBoard();</span><br><span class="line">        <span class="hljs-keyword">return</span> CB.buildComputer();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Product：要生产的产品框架"><a href="#Product：要生产的产品框架" class="headerlink" title="Product：要生产的产品框架"></a>Product：要生产的产品框架</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computer</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> String cpu;</span><br><span class="line">    <span class="hljs-keyword">private</span> String gpu;</span><br><span class="line">    <span class="hljs-keyword">private</span> String mother_board;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getCpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> cpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setCpu</span><span class="hljs-params">(String cpu)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.cpu = cpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getGpu</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> gpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setGpu</span><span class="hljs-params">(String gpu)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.gpu = gpu;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getMother_board</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> mother_board;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setMother_board</span><span class="hljs-params">(String MB)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.mother_board = MB;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-29T10:15:46.000Z">2019-05-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 419 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/java-enum.html">java_enum</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="深入剖析Java枚举类"><a href="#深入剖析Java枚举类" class="headerlink" title="深入剖析Java枚举类"></a>深入剖析Java枚举类</h1><ol>
+<li>某个变量取值仅限于集合中的元素。此时，可将这些数据集合定义为枚举类型。</li>
+<li>枚举类型是某类数据可能取值的集合</li>
+<li>由于枚举类型是导出数据类型，因此，必须先定义枚举类型，然后再用枚举类型定义枚举型变量。 　</li>
+<li>编译器编译程序时，会给枚举类型中的每一个元素指定一个整型常量值(也称为序号值)。</li>
+<li>若枚举类型定义中没有指定元素的整型常量值，则整型常量值从0开始依次递增</li>
+</ol>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　&#123;red=<span class="hljs-number">5</span>,blue=<span class="hljs-number">1</span>,green,black,white,yellow&#125;;</span><br><span class="line">　　该定义规定red为<span class="hljs-number">5</span> ，blue为<span class="hljs-number">1</span>，其后元素值从<span class="hljs-number">2</span> 开始递增加<span class="hljs-number">1</span>。green、black、white、yellow的值依次为<span class="hljs-number">2</span>、<span class="hljs-number">3</span>、<span class="hljs-number">4</span>、<span class="hljs-number">5</span>。</span><br></pre></td></tr></table></figure>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><ol>
+<li>enum 与 class、interface 具有相同地位；</li>
+<li>可以继承多个接口；</li>
+<li>可以拥有构造器、成员方法、成员变量；</li>
+<li>默认继承 java.lang.Enum 类，所以不能继承其他父类；</li>
+<li>java.lang.Enum 类实现了 java.lang.Serializable 和 java.lang.Comparable 接口；</li>
+<li>使用 enum 定义，默认使用 final 修饰，因此不能派生子类；</li>
+<li>构造器默认使用 private 修饰，且只能使用 <strong>private 修饰</strong>；</li>
+<li>枚举类所有实例必须在第一行给出，默认添加 public static final 修饰，否则无法产生实例；</li>
+<li><strong>每个枚举类第一个都是实例成员.</strong>,实例实例 关联 单例模式,static修饰枚举类,instance</li>
+</ol>
+<h1 id="深入阅读参考链接"><a href="#深入阅读参考链接" class="headerlink" title="深入阅读参考链接"></a>深入阅读参考链接</h1><p><a href="https://h2pl.github.io/2018/05/02/javase15/" target="_blank" rel="noopener">https://h2pl.github.io/2018/05/02/javase15/</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-28T01:10:04.000Z">2019-05-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/设计模式/">设计模式</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1119 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/Singleton.html">Singleton</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="Java单例模式的不同写法（懒汉式、饿汉式、双检锁、静态内部类、枚举）"><a href="#Java单例模式的不同写法（懒汉式、饿汉式、双检锁、静态内部类、枚举）" class="headerlink" title="Java单例模式的不同写法（懒汉式、饿汉式、双检锁、静态内部类、枚举）"></a>Java单例模式的不同写法（懒汉式、饿汉式、双检锁、静态内部类、枚举）</h1><h2 id="单例模式优点"><a href="#单例模式优点" class="headerlink" title="单例模式优点"></a>单例模式优点</h2><ol>
+<li><code>它能够避免实例对象的重复创建，不仅可以减少每次创建对象的时间开销，还可以节约内存空间；</code></li>
+<li><code>能够避免由于操作多个实例导致的逻辑错误。</code></li>
+<li><code>如果一个对象有可能贯穿整个应用程序，而且起到了全局统一管理控制的作用，那么单例模式也许是一个值得考虑的选择。</code></li>
+</ol>
+<p>总结：避免重复创建，节约时空消耗，适合全局统一管理</p>
+<h2 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">newInstance</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>构造函数 private，其他类无法实例化</li>
+<li>静态方法返回 实例</li>
+<li>在类加载的时候就已经创建，整个程序周期存活</li>
+<li>类加载时创建，避免多线程创建多实例，多线程同步问题</li>
+<li>缺点，没被用到也会被创建（感觉问题不大啊）</li>
+<li>适合情况: 单例对象占用内存小,初始化时就会被用到</li>
+</ol>
+<h2 id="懒汉模式-延迟加载"><a href="#懒汉模式-延迟加载" class="headerlink" title="懒汉模式- 延迟加载"></a>懒汉模式- 延迟加载</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">newInstance</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">null</span> == instance)&#123;</span><br><span class="line">            instance = <span class="hljs-keyword">new</span> Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>需要的时候才去创建</li>
+<li>单例对象创建成本高,使用次数少,按需创建</li>
+<li>缺点:未考虑线程安全,加锁解决线程同步问题</li>
+<li>synchronized</li>
+</ol>
+<h2 id="双重校验锁"><a href="#双重校验锁" class="headerlink" title="双重校验锁"></a>双重校验锁</h2><ol>
+<li>加锁的懒汉模式,由于锁的存在,所以导致性能问题,</li>
+<li>synchronized会导致比一般方法慢得多</li>
+</ol>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">null</span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) &#123;   <span class="hljs-comment">// Single Checked</span></span><br><span class="line">            <span class="hljs-keyword">synchronized</span> (Singleton.class) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (instance == <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// Double checked</span></span><br><span class="line">                    instance = <span class="hljs-keyword">new</span> Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>这代码很有想法</li>
+<li>平时调用getInstance直接返回实例,不存在锁的问题</li>
+<li>第一次调用,如果出现多线程,那么内部同步方法保证了依次执行</li>
+<li>同事 同步方法内再次校验 实例是否创建,简直万无一失啊</li>
+</ol>
+<ul>
+<li>双检锁隐患：</li>
+<li>Java指令重排优化。在不改变原语义的情况下，通过调整指令的执行顺序让程序运行的更快</li>
+<li>JVM未规定编译器优化相关的内容，所以<strong>JVM可以自由的进行指令重排序的优化</strong>。</li>
+<li>instance = new Singleton() 并不是一个原子操作<ol>
+<li>给 instance 分配内存</li>
+<li>调用 Singleton 的构造函数来初始化成员变量</li>
+<li>将instance对象指向分配的内存空间（执行完这步 instance 就为非 null 了）</li>
+</ol>
+</li>
+<li>由于第二三部不保证,所以如果出现  1-3-2,然后在3 执行完毕、2 未执行之前，被线程二抢占了,instance非null,导致线程二返回未初始化的Instance,就会报错</li>
+</ul>
+<h3 id="java-指令重排优化-的解决方案"><a href="#java-指令重排优化-的解决方案" class="headerlink" title="java 指令重排优化 的解决方案"></a>java 指令重排优化 的解决方案</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> Singleton instance;</span><br></pre></td></tr></table></figure>
+<p>加入volatile</p>
+<p>volatile特性:</p>
+<ol>
+<li>禁止指令重排化</li>
+</ol>
+<h2 id="静态内部类-优秀"><a href="#静态内部类-优秀" class="headerlink" title="静态内部类 优秀"></a>静态内部类 优秀</h2><ul>
+<li>类加载机制来保证只创建一个instance实例。它与饿汉模式一样，也是利用了类加载机制，因此不存在多线程并发的问题。</li>
+<li>内部类里面去创建对象实例。</li>
+<li>只要应用中不使用内部类，JVM就不会去加载这个单例类，也就不会创建单例对象，从而实现懒汉式的延迟加载。也就是说这种方式<strong>可以同时保证延迟加载和线程安全</strong>。</li>
+</ul>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonHolder</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title">newInstance</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> SingletonHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="enum单例模式"><a href="#enum单例模式" class="headerlink" title="enum单例模式"></a>enum单例模式</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EnumSingleton</span></span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">EnumSingleton</span><span class="hljs-params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> EnumSingleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> Singleton.INSTANCE.getInstance();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">enum</span> Singleton&#123;</span><br><span class="line">        INSTANCE;</span><br><span class="line">        <span class="hljs-keyword">private</span> EnumSingleton singleton;</span><br><span class="line">        <span class="hljs-comment">//JVM会保证此方法绝对只调用一次</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="hljs-string">"Singleton 初始化"</span>);</span><br><span class="line">            singleton = <span class="hljs-keyword">new</span> EnumSingleton();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> EnumSingleton <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> singleton;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="hljs-string">"main start"</span>);</span><br><span class="line">        EnumSingleton obj1 = getInstance();</span><br><span class="line">        EnumSingleton obj2 = getInstance();</span><br><span class="line">        <span class="hljs-comment">//输出结果：obj1==obj2?true</span></span><br><span class="line">        System.out.println(<span class="hljs-string">"obj1==obj2?"</span> + (obj1==obj2));</span><br><span class="line">        System.out.println(Singleton.INSTANCE.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//第一次调用 Singleton会导致构造函数执行,之后不会也就是jvm保证此方法绝对只调用一次</span></span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>（1）饿汉式：线程安全</p>
+<p>（2）懒汉式：非线程安全</p>
+<p>（3）双检锁：线程安全</p>
+<p>（4）静态内部类：线程安全</p>
+<p>（5）枚举：线程安全</p>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><ol>
+<li><a href="http://chen-tao.github.io/2016/12/30/about-java-singleton/" target="_blank" rel="noopener">http://chen-tao.github.io/2016/12/30/about-java-singleton/</a></li>
+<li><a href="https://blog.csdn.net/fly910905/article/details/79286680" target="_blank" rel="noopener">https://blog.csdn.net/fly910905/article/details/79286680</a></li>
+</ol>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-11T10:24:29.000Z">2019-05-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/安全/">安全</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/安全/web/">web</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/安全/web/csrf/">csrf</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 322 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/csrf-bypass-referer.html">csrf referer空绕过新思路</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="csrf-referer空绕过新思路"><a href="#csrf-referer空绕过新思路" class="headerlink" title="csrf referer空绕过新思路"></a>csrf referer空绕过新思路</h1><p>面试创宇被问到利用csrf过程中,如何使referer头部为空,脑中突然闪过一条新闻</p>
+<blockquote>
+<p>新浪微博图片增加referer校验,导致图床大面积失效</p>
+</blockquote>
+<p>记得当时一个解决办法是添加no referer这个html头,来达到referer空的目的.给面试官说了下思路.面试完抓紧测一波.</p>
+<h1 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h1><h2 id="直接csrf含有-referer代码"><a href="#直接csrf含有-referer代码" class="headerlink" title="直接csrf含有 referer代码"></a>直接csrf含有 referer代码</h2><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>文档标题<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is a paragraasdfph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://blog.azero-ng.cn"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>结果如下:果然有referer头部</p>
+<p><img src="/image/csrf-bypass-referer/referer.png" alt></p>
+<h2 id="头部添加meta"><a href="#头部添加meta" class="headerlink" title="头部添加meta"></a>头部添加meta</h2><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>文档标题<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"referrer"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"no-referrer"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is a paragraasdfph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://blog.azero-ng.cn"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>referer头部消失了</p>
+<p><img src="/image/csrf-bypass-referer/head.png" alt></p>
+<h2 id="元素添加-referrerPolicy-”no-referrer”"><a href="#元素添加-referrerPolicy-”no-referrer”" class="headerlink" title="元素添加 referrerPolicy=”no-referrer”"></a>元素添加 referrerPolicy=”no-referrer”</h2><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>文档标题<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>This is a paragraasdfph<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"http://blog3.azero-ng.cn"</span> <span class="hljs-attr">referrerPolicy</span>=<span class="hljs-string">"no-referrer"</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>referer 头部消失</p>
+<p><img src="/image/csrf-bypass-referer/line.png" alt></p>
+<p>注意，元素添加取消referer参数，网上有多种写法，但是有的无法成功，目前使用的，是mdn官方推荐，并已在chrome 74 测试通过。</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>MDN 官方文档对 <strong>head  Referrer-Policy</strong> 的介绍，强烈推荐阅读</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy</a></p>
+<p>MDN官方文档 对图像元素referrerPolicy（HTMLImageElement.referrerPolicy）的介绍，强烈推荐</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/referrerPolicy#Browser_compatibility" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/referrerPolicy#Browser_compatibility</a></p>
+<p>不错的文章</p>
+<p><a href="https://juejin.im/entry/5adaa72c6fb9a07aa43bc665" target="_blank" rel="noopener">https://juejin.im/entry/5adaa72c6fb9a07aa43bc665</a></p>
+<p>有点老了，不太推荐</p>
+<p><a href="https://imququ.com/post/referrer-policy.html" target="_blank" rel="noopener">https://imququ.com/post/referrer-policy.html</a></p>
+<p>csrf绕过技巧</p>
+<p><a href="https://zhuanlan.zhihu.com/p/50619269" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/50619269</a></p>
 
         </div>
         
@@ -277,6 +691,63 @@ var _hmt = _hmt || [];
 <p><a href="http://blog.51yip.com/linux/1404.html" target="_blank" rel="noopener">ptables 添加，删除，查看，修改</a></p>
 <h2 id="iptables-端口转发"><a href="#iptables-端口转发" class="headerlink" title="iptables 端口转发"></a>iptables 端口转发</h2><p><a href="https://blog.csdn.net/zzhongcy/article/details/42738285" target="_blank" rel="noopener">linux下用iptables做本机端口转发方法</a></p>
 <p><a href="https://www.hitsword.org/2018/165.html" target="_blank" rel="noopener">Centos 6 + iptables 作为网关NAT转发、端口转发笔记</a></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 237 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/git-pre-commit.html">git_pre_commit</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
+<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
+<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
+<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
+</li>
+<li><p>添加pre commit hook</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
+</li>
+<li><p>最终每次commit都可以保证配置文件的更新</p>
+</li>
+</ol>
 
         </div>
         
@@ -384,6 +855,25 @@ var _hmt = _hmt || [];
 
 
 
+
+    
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous">
+            <a class="is-flex-grow has-text-black-ter" href="/">上一页</a>
+        </div>
+        <div class="pagination-next is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/page/3/">下一页</a>
+        </div>
+        <ul class="pagination-list is-hidden-mobile">
+            
+            <li><a class="pagination-link has-text-black-ter" href="/">1</a></li>
+            
+            <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
+</div>
 </div>
                 
 

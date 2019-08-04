@@ -2,23 +2,23 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>git_pre_commit - Azero</title>
+<title>firewalld下不同网卡端口转发 - Azero</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+    <meta name="description" content="firewalld 原生端口转发(不支持不同网卡间转发)先说一下环境:   本机ip 202.112.159.24 需要把本机的80端口转发到本机的8080端口 需要把本机的443端口转发到同网卡202.112.159.33的443端口  首先允许端口进入 firewalldfirewall-cmd –permanent –zone=public –add-port=8080/tcp 允许防火墙伪">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git_pre_commit">
-<meta property="og:url" content="http://blog.azero-ng.cn/git-pre-commit.html">
+<meta property="og:title" content="firewalld下不同网卡端口转发">
+<meta property="og:url" content="http://blog.azero-ng.cn/firewalld下不同网卡端口转发.html">
 <meta property="og:site_name" content="Azero">
-<meta property="og:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta property="og:description" content="firewalld 原生端口转发(不支持不同网卡间转发)先说一下环境:   本机ip 202.112.159.24 需要把本机的80端口转发到本机的8080端口 需要把本机的443端口转发到同网卡202.112.159.33的443端口  首先允许端口进入 firewalldfirewall-cmd –permanent –zone=public –add-port=8080/tcp 允许防火墙伪">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://blog.azero-ng.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-05-07T00:40:10.066Z">
+<meta property="og:updated_time" content="2019-05-25T04:12:36.465Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git_pre_commit">
-<meta name="twitter:description" content="git pre commit 钩子在HEXO的使用需求分析1234567.├── public├── source└── themes    ├── icarus    │   └── _config.yml    └── icarus.yml hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,icarus项目没有把icarus 的配置文件">
+<meta name="twitter:title" content="firewalld下不同网卡端口转发">
+<meta name="twitter:description" content="firewalld 原生端口转发(不支持不同网卡间转发)先说一下环境:   本机ip 202.112.159.24 需要把本机的80端口转发到本机的8080端口 需要把本机的443端口转发到同网卡202.112.159.33的443端口  首先允许端口进入 firewalldfirewall-cmd –permanent –zone=public –add-port=8080/tcp 允许防火墙伪">
 <meta name="twitter:image" content="http://blog.azero-ng.cn/images/og_image.png">
 
 
@@ -112,7 +112,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                <img src="/images/logo.svg" alt="firewalld下不同网卡端口转发" height="28">
             
             </a>
         </div>
@@ -158,17 +158,17 @@ var _hmt = _hmt || [];
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-05-06T13:43:38.000Z">2019-05-06</time>
+                <time class="level-item has-text-grey" datetime="2019-05-07T01:03:03.000Z">2019-05-07</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/开发/">开发</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/开发/git/">git</a>
+                <a class="has-link-grey -link" href="/categories/linux/">linux</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/linux/防火墙/">防火墙</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 237 个字)
+                    9 分钟 读完 (大约 1334 个字)
                 </span>
                 
                 
@@ -177,23 +177,49 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                git_pre_commit
+                firewalld下不同网卡端口转发
             
         </h1>
         <div class="content">
-            <h1 id="git-pre-commit-钩子在HEXO的使用"><a href="#git-pre-commit-钩子在HEXO的使用" class="headerlink" title="git pre commit 钩子在HEXO的使用"></a>git pre commit 钩子在HEXO的使用</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── public</span><br><span class="line">├── source</span><br><span class="line">└── themes</span><br><span class="line">    ├── icarus</span><br><span class="line">    │   └── _config.yml</span><br><span class="line">    └── icarus.yml</span><br></pre></td></tr></table></figure>
-<p>hexo 目录结构如上,hexo 根目录已初始化为git项目,icarus为子模块.出于更新,pull考虑,<strong>icarus</strong>项目没有把icarus</p>
-<p>的配置文件_config.yml放到git中.但是由于icarus为子模块,所以主模块也无法add icarus的配置文件.但是为了保存icarus的配置文件,我们必须要添加到git中,以方便同步和备份</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li><p>在theme目录下备份 _config.yml 为icarus.yml</p>
-</li>
-<li><p>添加pre commit hook</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">if ! diff themes/icarus.yml themes/icarus/_config.yml &amp;&gt; /dev/null ; </span><br><span class="line">then</span><br><span class="line">    cp themes/icarus/_config.yml themes/icarus.yml</span><br><span class="line">    git add themes/icarus.yml</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>每次commit的时候都会检查_config.yml是否改变,改变则更新icarus.yml 并add</p>
-</li>
-<li><p>最终每次commit都可以保证配置文件的更新</p>
-</li>
+            <h1 id="firewalld-原生端口转发-不支持不同网卡间转发"><a href="#firewalld-原生端口转发-不支持不同网卡间转发" class="headerlink" title="firewalld 原生端口转发(不支持不同网卡间转发)"></a>firewalld 原生端口转发(不支持不同网卡间转发)</h1><p>先说一下环境: </p>
+<ol>
+<li>本机ip 202.112.159.24</li>
+<li>需要把本机的80端口转发到本机的8080端口</li>
+<li>需要把本机的443端口转发到同网卡202.112.159.33的443端口</li>
 </ol>
+<h2 id="首先允许端口进入-firewalld"><a href="#首先允许端口进入-firewalld" class="headerlink" title="首先允许端口进入 firewalld"></a>首先允许端口进入 firewalld</h2><p>firewall-cmd –permanent –zone=public –add-port=8080/tcp</p>
+<h2 id="允许防火墙伪装ip"><a href="#允许防火墙伪装ip" class="headerlink" title="允许防火墙伪装ip"></a>允许防火墙伪装ip</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-masquerade --permanent</span><br></pre></td></tr></table></figure>
+<p>–add-masquerade:我的理解是 在 端口转发的时候把源包的来源地址更改为本机ip地址(iptables 自动获取本机ip)</p>
+<p>premanent选项是永久添加规则,但是不会立即生效,需要reload</p>
+<p>## </p>
+<h1 id="firewalld-下使用iptables-双网卡-端口转发"><a href="#firewalld-下使用iptables-双网卡-端口转发" class="headerlink" title="firewalld 下使用iptables 双网卡 端口转发"></a>firewalld 下使用iptables 双网卡 端口转发</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -I PREROUTING -p tcp -m tcp --dport 9001 -j DNAT --to-destination 192.168.122.10:22</span><br><span class="line">iptables -t nat -I POSTROUTING -d 192.168.122.10 -p tcp -m tcp --dport 22 -j MASQUERADE</span><br><span class="line">iptables -t filter -I FORWARD -o virbr0 -d 192.168.122.10 -p tcp -m tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -I PREROUTING -p tcp -m tcp --dport 9002 -j DNAT --to-destination 192.168.122.10:22</span><br><span class="line">iptables -t nat -I POSTROUTING -d 192.168.122.10 -p tcp -m tcp --dport 22 -j MASQUERADE</span><br><span class="line">iptables -t filter -I FORWARD -o virbr0 -d 192.168.122.10 -p tcp -m tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h2 id="firewalld-direct"><a href="#firewalld-direct" class="headerlink" title="firewalld direct"></a>firewalld direct</h2><p>built_in表竟然是加到了*_direct表里,有毛用,放弃firewalld了</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --direct --add-rule ipv4 nat PREROUTING 0 -p tcp -m tcp --dport 9001 -j DNAT --to-destination 192.168.122.10:22</span><br><span class="line">firewall-cmd --permanent --direct --add-rule ipv4 nat POSTROUTING 0 -d 192.168.122.10 -p tcp -m tcp --dport 22 -j MASQUERADE</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">firewall-cmd --permanent --direct --add-rule ipv4 filter FORWARD 0 -o virbr0 -d 192.168.122.10 -p tcp -m tcp --dport 22 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h1 id="改用iptables"><a href="#改用iptables" class="headerlink" title="改用iptables"></a>改用iptables</h1><h2 id="删除firewalld"><a href="#删除firewalld" class="headerlink" title="删除firewalld"></a>删除firewalld</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">停止firewalld服务</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">禁用firewalld服务</span></span><br><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="安装-iptables"><a href="#安装-iptables" class="headerlink" title="安装 iptables"></a>安装 iptables</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">先检查是否安装了iptables</span></span><br><span class="line">service iptables status</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">安装iptables</span></span><br><span class="line">yum install -y iptables</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">升级iptables</span></span><br><span class="line">yum update iptables </span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">安装iptables-services</span></span><br><span class="line">yum install iptables-services</span><br></pre></td></tr></table></figure>
+<h2 id="删除所有规则"><a href="#删除所有规则" class="headerlink" title="删除所有规则"></a>删除所有规则</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -F  </span><br><span class="line"> </span><br><span class="line">iptables -t nat -X  </span><br><span class="line"> </span><br><span class="line">iptables -t nat -P PREROUTING ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t nat -P POSTROUTING ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t nat -P OUTPUT ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -F  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -X  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -P PREROUTING ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -P INPUT ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -P FORWARD ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -P OUTPUT ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t mangle -P POSTROUTING ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -F  </span><br><span class="line"> </span><br><span class="line">iptables -X  </span><br><span class="line"> </span><br><span class="line">iptables -P FORWARD ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -P INPUT ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -P OUTPUT ACCEPT  </span><br><span class="line"> </span><br><span class="line">iptables -t raw -F</span><br><span class="line">iptables -t raw -X</span><br><span class="line">iptables -t raw -P PREROUTING ACCEPT</span><br><span class="line">iptables -t raw -P OUTPUT ACCEPT</span><br></pre></td></tr></table></figure>
+<h2 id="设置规则"><a href="#设置规则" class="headerlink" title="设置规则"></a>设置规则</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp --dport 443 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line">iptables -P INPUT DROP</span><br><span class="line">iptables -P OUTPUT ACCEPT</span><br><span class="line">iptables -P FORWARD DROP</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">测试</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A INPUT -m <span class="hljs-built_in">set</span> --match-set bjtu src -j DROP</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state NEW,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p tcp -m multiport --sports 80,443 -m state --state ESTABLISHED -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h2 id="nginx-反向代理-允许-80-443端口"><a href="#nginx-反向代理-允许-80-443端口" class="headerlink" title="nginx 反向代理 允许 80 443端口"></a>nginx 反向代理 允许 80 443端口</h2><p>开启22,80,443</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 重要重要优先 22端口</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 22  -m set --match-set bjtu src -m state --state NEW,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p tcp --sport 22  -m set --match-set bjtu src -m state --state ESTABLISHED -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"><span class="hljs-comment"># 允许来自guest的返回</span></span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">抛弃该种方式,采用ipset</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A INPUT -p tcp -s 192.168.122.10 -j ACCEPT</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A INPUT -p tcp -s 192.168.122.12 -j ACCEPT</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A OUTPUT -p tcp -d 192.168.122.10 -j ACCEPT</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A OUTPUT -p tcp -d 192.168.122.12 -j ACCEPT</span></span><br><span class="line">iptables -A INPUT -m set --match-set kvm_guest src -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -m set --match-set kvm_guest src -j ACCEPT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">ipables <span class="hljs-built_in">log</span>功能</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A INPUT -j LOG --<span class="hljs-built_in">log</span>-prefix <span class="hljs-string">"INPUT:DROP:"</span> --<span class="hljs-built_in">log</span>-level 6</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"><span class="hljs-comment"># 允许80,443端口访问</span></span></span><br><span class="line">iptables -A INPUT -p tcp -m multiport --dports 80,443 -m state --state NEW,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p tcp -m multiport --sports 80,443 -m state --state ESTABLISHED -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">允许ping</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A INPUT -p icmp --icmp-type <span class="hljs-built_in">echo</span>-request -j ACCEPT</span></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -A OUTPUT -p icmp --icmp-type <span class="hljs-built_in">echo</span>-reply -j ACCEPT</span></span><br><span class="line">iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">允许dns</span></span><br><span class="line">iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">配置端口转发</span></span><br><span class="line">iptables -t nat -I PREROUTING  -p tcp -m tcp --dport 9001 -m set --match-set bjtu src -j DNAT --to-destination 192.168.122.10:22</span><br><span class="line">iptables -t nat -I POSTROUTING -d 192.168.122.10 -p tcp -m tcp --dport 22 -m set --match-set bjtu src -j MASQUERADE</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash"> 最后添加默认规则</span></span><br><span class="line">iptables -P INPUT DROP</span><br><span class="line">iptables -P OUTPUT DROP</span><br><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">iptables -P FORWARD DROP</span></span><br></pre></td></tr></table></figure>
+<h1 id="iptables-默认表-filter"><a href="#iptables-默认表-filter" class="headerlink" title="iptables 默认表 filter"></a>iptables 默认表 filter</h1><h1 id="iptables-禁用dhcp导致-kvm-ssh-无法访问"><a href="#iptables-禁用dhcp导致-kvm-ssh-无法访问" class="headerlink" title="iptables 禁用dhcp导致 kvm ssh 无法访问"></a>iptables 禁用dhcp导致 kvm ssh 无法访问</h1><p>临时解决办法</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p udp -s 192.168.122.10 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p udp -s 192.168.122.11 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p udp -s 192.168.122.12 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -d 192.168.122.10 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -d 192.168.122.11 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -d 192.168.122.12 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>优化使用ipset</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ipset -N kvm_guest nethash</span><br><span class="line">ipset add kvm_guest 192.168.122.1/24</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -m set --match-set kvm_guest src -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -m set --match-set kvm_guest src -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>草稿</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p udp -m udp --sport 53 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -m udp --dport 53 -j ACCEPT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iptables -t filter -A INPUT -p dhcp -j ACCEPT</span><br><span class="line">iptables -t filter -A OUTPUT -p dhcp -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables -t filter -A INPUT -p icmp -j ACCEPT</span><br><span class="line">iptables -t filter -A OUTPUT -p icmp -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables  -I INPUT -p udp --dport 67:68 --sport 67:68 -j ACCEPT</span><br><span class="line">iptables  -I OUTPUT -p udp --dport 67:68 --sport 67:68 -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -p udp -s 192.168.122.10 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p udp -s 192.168.122.12 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -d 192.168.122.10 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -p udp -d 192.168.122.12 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h1 id="iptables-禁用icmp会导致"><a href="#iptables-禁用icmp会导致" class="headerlink" title="iptables 禁用icmp会导致"></a>iptables 禁用icmp会导致</h1><p>sendmsg:     Operation not permitted</p>
+<h1 id="收尾阶段"><a href="#收尾阶段" class="headerlink" title="收尾阶段"></a>收尾阶段</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">ip <span class="hljs-built_in">set</span>持久化</span></span><br><span class="line"></span><br><span class="line">systemctl enable iptabels</span><br><span class="line">service iptables save</span><br></pre></td></tr></table></figure>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><h2 id="tcpdump用法"><a href="#tcpdump用法" class="headerlink" title="tcpdump用法"></a>tcpdump用法</h2><p><a href="https://linuxwiki.github.io/NetTools/tcpdump.html" target="_blank" rel="noopener">tcpdump用法</a></p>
+<p><a href="https://www.jianshu.com/p/ed001ae61c58" target="_blank" rel="noopener">Linux之iptables详解及tcpdump</a></p>
+<h2 id="iptables-入门"><a href="#iptables-入门" class="headerlink" title="iptables 入门"></a>iptables 入门</h2><p><a href="http://www.frozentux.net/iptables-tutorial/images/tables_traverse.jpg" target="_blank" rel="noopener">iptables非常容易理解的结构图</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Iptables_(简体中文" target="_blank" rel="noopener">arch wiki 讲得不错,入门可以,但是不全</a>)</p>
+<p><a href="https://www.jianshu.com/p/ed001ae61c58" target="_blank" rel="noopener">Linux之iptables详解及tcpdump,非常全</a></p>
+<p><a href="https://www.unixso.com/Linux/iptables.html" target="_blank" rel="noopener">常见iptables使用规则场景整理</a></p>
+<p><a href="http://blog.51yip.com/linux/1404.html" target="_blank" rel="noopener">ptables 添加，删除，查看，修改</a></p>
+<h2 id="iptables-端口转发"><a href="#iptables-端口转发" class="headerlink" title="iptables 端口转发"></a>iptables 端口转发</h2><p><a href="https://blog.csdn.net/zzhongcy/article/details/42738285" target="_blank" rel="noopener">linux下用iptables做本机端口转发方法</a></p>
+<p><a href="https://www.hitsword.org/2018/165.html" target="_blank" rel="noopener">Centos 6 + iptables 作为网关NAT转发、端口转发笔记</a></p>
 
         </div>
         
@@ -210,16 +236,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/firewalld下不同网卡端口转发.html">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/csrf-bypass-referer.html">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">firewalld下不同网卡端口转发</span>
+                <span class="level-item">csrf referer空绕过新思路</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/archlinux-transparent-proxy.html">
-                <span class="level-item">archlinux_transparent_proxy</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/git-pre-commit.html">
+                <span class="level-item">git_pre_commit</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -351,15 +377,79 @@ var _hmt = _hmt || [];
             <ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1</span>
-        <span>git pre commit 钩子在HEXO的使用</span>
+        <span>firewalld 原生端口转发(不支持不同网卡间转发)</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.1</span>
-        <span>需求分析</span>
+        <span>首先允许端口进入 firewalld</span>
         </a></li><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">1.2</span>
-        <span>解决方案</span>
+        <span>允许防火墙伪装ip</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2</span>
+        <span>firewalld 下使用iptables 双网卡 端口转发</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">2.1</span>
+        <span>firewalld direct</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3</span>
+        <span>改用iptables</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3.1</span>
+        <span>删除firewalld</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3.2</span>
+        <span>安装 iptables</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3.3</span>
+        <span>删除所有规则</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3.4</span>
+        <span>设置规则</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">3.5</span>
+        <span>nginx 反向代理 允许 80 443端口</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">4</span>
+        <span>iptables 默认表 filter</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">5</span>
+        <span>iptables 禁用dhcp导致 kvm ssh 无法访问</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">6</span>
+        <span>iptables 禁用icmp会导致</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">7</span>
+        <span>收尾阶段</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">8</span>
+        <span>参考链接</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">8.1</span>
+        <span>tcpdump用法</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">8.2</span>
+        <span>iptables 入门</span>
+        </a></li><li>
+        <a class="is-flex" href="#undefined">
+        <span class="has-mr-6">8.3</span>
+        <span>iptables 端口转发</span>
         </a></li></ul></li></ul>
         </div>
     </div>
@@ -871,7 +961,7 @@ var _hmt = _hmt || [];
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="git_pre_commit" height="28">
+                    <img src="/images/logo.svg" alt="firewalld下不同网卡端口转发" height="28">
                 
                 </a>
                 <p class="is-size-7">
